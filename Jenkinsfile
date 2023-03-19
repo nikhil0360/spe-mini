@@ -10,10 +10,13 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'python3 -m venv env'
-                sh 'source env/bin/activate'
-                sh 'pip3 install -r requirements.txt'
-                sh 'pytest test_calculator.py'
+                
+                withPythonEnv('env') {
+                    sh 'pip3 install -r requirements.txt'
+                    sh 'pytest test_calculator.py'
+                }
+
+                echo 'Done Testing..'
             }
         }
 
