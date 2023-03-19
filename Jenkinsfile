@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 
-                withPythonEnv('env') {
+                withPythonEnv('python3') {
                     sh 'pip3 install -r requirements.txt'
                     sh 'pytest test_calculator.py'
                 }
