@@ -9,9 +9,20 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing webhook'
+                echo 'Testing..'
+                sh 'python3 -m venv env'
+                sh 'source env/bin/activate'
+                sh 'pip3 install -r requirements.txt'
+                sh 'pytest test_calculator.py'
             }
         }
+
+        stage('docker build') {
+            steps {
+                sh 'docker build .'
+            }
+        }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
