@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Scientific Calculator</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Scientific Calculator</h1>
+		<form method="post">
+			<div class="form-group">
+				<label for="operation">Select an operation:</label>
+				<select class="form-control" id="operation" name="operation">
+					<option value="sqrt">Square root</option>
+					<option value="fact">Factorial</option>
+					<option value="ln">Natural logarithm (base е)</option>
+					<option value="power">Power</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="num1">Enter a number:</label>
+				<input type="text" class="form-control" id="num1" name="num1" required>
+			</div>
+			<div class="form-group" id="num2-div">
+				<label for="num2">Enter another number (for power operation only):</label>
+				<input type="text" class="form-control" id="num2" name="num2">
+			</div>
+			<button type="submit" class="btn btn-primary">Calculate</button>
+		</form>
+		{% if result is not none %}
+			<div class="result">
+                Your query: {{ query }}
+                <br>
+                Result: {{ result }}
+			</div>
+		{% endif %}
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.3/dist/umd/popperjs-core.min.js"
+		integrity="sha384-AHkC7euPqx+dScEQGXBntRiWbQR6noBCU6FbKYV7KjY3icPp+BZ5stDxPv5h5F5g"
+		crossorigin="anonymous"></script> -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="static/script.js"></script>
+</body>
+</html>
