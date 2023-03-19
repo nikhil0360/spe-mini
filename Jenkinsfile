@@ -44,10 +44,7 @@ pipeline {
             steps {
                 echo 'Deploying locally..'
 
-                sh '/usr/local/bin/docker stop nikhil0360/flask-calc'
-
                 withPythonEnv('python3') {
-                    // sh 'pip3 install -r requirements.txt'
                     sh 'ansible-playbook playbook.yml'
                 }
 
