@@ -6,7 +6,7 @@
     - name: deploy flask-calc docker container locally
       docker_container:
         image: nikhil0360/flask-calc
-        name: nikhil0360/flask-calc
+        name: flask-calc
         state: started
         auto_remove: true
         ports:
