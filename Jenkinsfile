@@ -40,7 +40,7 @@ pipeline {
         stage('Push Image to docker hub'){
             steps{
                 sh '/usr/local/bin/docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}'
-                sh 'dock/usr/local/bin/dockerer tag flask-calc ${DOCKER_USER}/flask-calc'
+                sh 'dock/usr/local/bin/docker tag flask-calc ${DOCKER_USER}/flask-calc'
                 sh '/usr/local/bin/docker push ${DOCKER_USER}/flask-calc'
             }
         }
