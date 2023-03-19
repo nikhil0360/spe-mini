@@ -22,7 +22,7 @@ pipeline {
 
         stage('docker build') {
             steps {
-                sh 'docker build .'
+                sh '/usr/local/bin/docker build .'
             }
         }
 
