@@ -17,6 +17,7 @@ pipeline {
                 echo 'Testing..'
                 
                 withPythonEnv('python3') {
+                    sh 'pip3 install --upgrade pip'
                     sh 'pip3 install -r requirements.txt'
                     sh 'pytest test_calculator.py'
                 }
@@ -43,7 +44,7 @@ pipeline {
             steps {
                 echo 'Deploying locally..'
 
-                sh 'docker stop $(docker ps -a -q)'
+                sh '/usr/local/bin/docker stop $(docker ps -a -q)'
 
                 withPythonEnv('python3') {
                     // sh 'pip3 install -r requirements.txt'
@@ -53,5 +54,12 @@ pipeline {
                 echo 'Done Deploying.. your app is running on http://localhost:5000'
             }
         }
+
+        // stage('Remove all images and containers') {
+        //     steps {
+        //         sh '/usr/local/bin/docker rmi -f $(docker images -aq)' 
+        //         sh '/usr/local/bin/docker rm -vf $(docker ps -aq)'
+        //     }
+        // }
     }
 }
