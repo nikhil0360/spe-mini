@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_USER = 'nikhil0360'
+        DOCKER_PASS = '2mrf!2cGC3#uC83'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -29,6 +34,14 @@ pipeline {
         stage('docker run') {
             steps {
                 sh '/usr/local/bin/docker run -d -p 5000:5000 --name flask-calc-app flask-calc'
+            }
+        }
+
+        stage('Push Image to docker hub'){
+            steps{
+                sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}'
+                sh 'docker tag flask-calc ${DOCKER_USER}/flask-calc'
+                sh 'docker push ${DOCKER_USER}/flask-calc'
             }
         }
 
