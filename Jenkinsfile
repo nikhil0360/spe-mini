@@ -31,12 +31,6 @@ pipeline {
             }
         }
 
-        // stage('docker run') {
-        //     steps {
-        //         sh '/usr/local/bin/docker run -d -p 5000:5000 --name flask-calc-app flask-calc'
-        //     }
-        // }
-
         stage('Push Image to docker hub'){
             steps{
                 sh '/usr/local/bin/docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}'
@@ -47,7 +41,16 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying locally..'
+
+                sh 'docker stop $(docker ps -a -q)'
+
+                withPythonEnv('python3') {
+                    // sh 'pip3 install -r requirements.txt'
+                    sh 'ansible-playbook playbook.yml'
+                }
+
+                echo 'Done Deploying.. your app is running on http://localhost:5000'
             }
         }
     }

@@ -14,3 +14,6 @@ ENV FLASK_APP=calculator.py
 ENV FLASK_ENV=development
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+
+# docker rmi -f $(docker images -aq)
+# docker rm -vf $(docker ps -aq)

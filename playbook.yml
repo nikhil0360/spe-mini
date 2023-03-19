@@ -1,0 +1,13 @@
+# playbook.yml
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: deploy flask-calc docker container locally
+      docker_container:
+        image: nikhil0360/flask-calc
+        name: flask-calc
+        state: started
+        auto_remove: true
+        ports:
+          - "5000:5000"
