@@ -1,6 +1,7 @@
 # playbook.yml
 ---
-- hosts: host_machine
+- hosts: localhost
+  connection: local
   tasks:
     - name: deploy flask-calc docker container locally
       docker_container:
@@ -10,8 +11,3 @@
         auto_remove: true
         ports:
           - "5000:5000"
-
-
-# ansible plugin
-# inventory file
-# deploy on actual server
