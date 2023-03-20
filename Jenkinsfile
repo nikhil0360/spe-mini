@@ -2,8 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // DOCKER_USER = 'nikhil0360'
-        // DOCKER_PASS = '2mrf!2cGC3#uC83'
         registry = "nikhil0360/flask-calc"
         credentialID = "dockerhub"
         dockerImage = ""
@@ -37,7 +35,6 @@ pipeline {
         stage('docker build') {
             steps {
                 echo 'Building docker image..'
-                // sh '/usr/local/bin/docker build --tag flask-calc .'
                 script{
                     dockerImage = docker.build(registry + ":latest")
                 }
@@ -48,10 +45,6 @@ pipeline {
         stage('Push Image to docker hub'){
             steps{
                 echo 'Pushing image to docker hub..'
-                // sh '/usr/local/bin/docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}'
-                // sh '/usr/local/bin/docker tag flask-calc ${DOCKER_USER}/flask-calc'
-                // sh '/usr/local/bin/docker push ${DOCKER_USER}/flask-calc'
-
                 script{
                     docker.withRegistry('', credentialID) {
                         dockerImage.push()
@@ -63,21 +56,18 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying locally..'
+                // echo 'Deploying locally..'
 
-                withPythonEnv('python3') {
-                    sh 'ansible-playbook playbook.yml'
-                }
+                // withPythonEnv('python3') {
+                //     sh 'ansible-playbook playbook.yml'
+                // }
 
-                echo 'Done Deploying.. your app is running on http://localhost:5000'
+                // echo 'Done Deploying.. your app is running on http://localhost:5000'
+                ansiblePlaybook colorized: true,
+                installation: 'Ansible',
+                inventory: 'inventory',
+                playbook: 'playbook.yml'
             }
         }
-
-        // stage('Remove all images and containers') {
-        //     steps {
-        //         sh '/usr/local/bin/docker rmi -f $(docker images -aq)' 
-        //         sh '/usr/local/bin/docker rm -vf $(docker ps -aq)'
-        //     }
-        // }
     }
 }
