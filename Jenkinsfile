@@ -56,17 +56,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // echo 'Deploying locally..'
+                echo 'Deploying locally..'
 
-                // withPythonEnv('python3') {
-                //     sh 'ansible-playbook playbook.yml'
-                // }
+                withPythonEnv('python3') {
+                    sh 'ansible-playbook playbook.yml'
+                }
 
-                // echo 'Done Deploying.. your app is running on http://localhost:5000'
-                ansiblePlaybook colorized: true,
-                installation: 'Ansible',
-                inventory: 'inventory',
-                playbook: 'playbook.yml'
+                echo 'Done Deploying.. your app is running on http://localhost:5000'
+                
             }
         }
     }
