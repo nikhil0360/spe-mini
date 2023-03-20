@@ -59,7 +59,7 @@ pipeline {
                 echo 'Deploying locally..'
 
                 withPythonEnv('python3') {
-                    sh 'ansible-playbook playbook.yml'
+                    sh 'ansible-playbook playbook.yml -i inventory'
                 }
 
                 echo 'Done Deploying.. your app is running on http://localhost:5000'

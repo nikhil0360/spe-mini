@@ -1,7 +1,4 @@
-# playbook.yml
----
-- hosts: localhost
-  connection: local
+- hosts: host_machine
   tasks:
     - name: deploy flask-calc docker container locally
       docker_container:
