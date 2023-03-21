@@ -1,7 +1,14 @@
 import math
 from flask import Flask, request, render_template
+import logging
 
 app = Flask(__name__)
+
+logging.basicConfig(
+    filename='demo.log', 
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s'
+    )
 
 def sqrt(num1):
     return math.sqrt(float(num1))
@@ -26,6 +33,7 @@ def calculate():
     result = None
     query = None
 
+    app.logger.info(f'Processing {operation} request')
     if operation == 'sqrt':
         result = sqrt(num1)
     elif operation == 'fact':

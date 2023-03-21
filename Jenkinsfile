@@ -8,15 +8,15 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Installation') {
             steps {
-                echo 'Building..'
+                echo 'Installing dependencies..'
                 echo 'Installing requirements..'
                 withPythonEnv('python3') {
                     sh 'pip3 install --upgrade pip'
                     sh 'pip3 install -r requirements.txt'
                 }
-                echo 'Done Building..'
+                echo 'Done Installing dependencies..'
             }
         }
 
@@ -62,8 +62,8 @@ pipeline {
                     sh 'ansible-playbook playbook.yml'
                 }
 
-                echo 'Done Deploying.. your app is running on http://localhost:5000'
-                
+                echo 'Done Deploying'
+				echo 'your app is running on http://localhost:5000'
             }
         }
     }
